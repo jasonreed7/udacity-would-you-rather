@@ -1,25 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import { Component, Fragment } from 'react';
+import { LoadingBar } from 'react-redux-loading';
+import { connect } from 'react-redux';
+import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import { handleInitialData } from './actions/shared';
+import authedUser from './reducers/authedUser';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
+  render() {
+    return (
+      <Router>
+        <LoadingBar />
+        <div className='container d-flex justify-content-center'>
+          {
+            this.props.authedUser ?
+              (<div>Hi</div>) :
+              (
+                <Switch>
+                  <Route exact path='/login'>
+                    <LoginPage />
+                  </Route>
+                  <Route path='*'>
+                    <Redirect to='/login' />
+                  </Route>
+                </Switch>
+              )
+          }
+        </div>
+      </Router>
+    )
+  }
 }
 
-export default App;
+function mapStateToProps({ authedUser, users }) {
+  return {
+    authedUser: users[authedUser]
+  }
+}
+
+export default connect(mapStateToProps)(App);
