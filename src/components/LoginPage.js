@@ -41,7 +41,7 @@ class LoginPage extends Component {
                     <div>Please sign in to continue</div>
                 </div>
                 <div className='card-body'>
-                    <h3>Sign in</h3>
+                    <h4 className className='mb-3'>Sign in</h4>
                     <form onSubmit={this.handleSubmit}>
                         <div className='mb-3'>
                             <select className='form-select' value={this.state.selectedUser} onChange={this.handleChange}>

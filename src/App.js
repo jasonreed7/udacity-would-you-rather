@@ -6,6 +6,8 @@ import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-d
 import LoginPage from './components/LoginPage';
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
+import { setAuthedUser } from './actions/authedUser';
+import Dashboard from './components/Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -20,7 +22,7 @@ class App extends Component {
           {
             this.props.authedUser ?
               (
-                <div>Hi</div>
+                <Dashboard />
               ) :
               (
                 <Switch>

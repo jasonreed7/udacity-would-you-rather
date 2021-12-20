@@ -15,3 +15,15 @@ code {
 .card {
   width: 24rem;
 }
+
+.nested-card {
+  max-width: 22rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.img-avatar {
+  width: 100%;
+}
