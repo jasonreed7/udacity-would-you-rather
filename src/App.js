@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import { handleInitialData } from './actions/shared';
-import authedUser from './reducers/authedUser';
+import Nav from './components/Nav';
 
 class App extends Component {
   componentDidMount() {
@@ -15,10 +15,13 @@ class App extends Component {
     return (
       <Router>
         <LoadingBar />
+        {this.props.authedUser && <Nav />}
         <div className='container d-flex justify-content-center'>
           {
             this.props.authedUser ?
-              (<div>Hi</div>) :
+              (
+                <div>Hi</div>
+              ) :
               (
                 <Switch>
                   <Route exact path='/login'>

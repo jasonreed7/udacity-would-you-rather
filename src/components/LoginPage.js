@@ -35,7 +35,7 @@ class LoginPage extends Component {
         }
 
         return (
-            <div className='card text-center' >
+            <div className='card text-center mt-5' >
                 <div className='card-header'>
                     <div className='fw-bold'>Welcome to the Would You Rather App!</div>
                     <div>Please sign in to continue</div>
