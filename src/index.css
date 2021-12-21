@@ -28,6 +28,13 @@ code {
   width: 100%;
 }
 
-.score-card {
+.score-card,
+.result-option-card {
   width: auto;
+}
+
+.card.selected {
+  border-color: green;
+  background-color: lightgreen;
+  color: green;
 }

@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import Dashboard from './components/Dashboard';
 import NewQuestion from './components/NewQuestion';
 import Leaderboard from './components/Leaderboard';
+import Question from './components/Question';
 
 class App extends Component {
   componentDidMount() {
@@ -32,6 +33,9 @@ class App extends Component {
                   </Route>
                   <Route exact path='/leaderboard'>
                     <Leaderboard />
+                  </Route>
+                  <Route exact path='/questions/:questionId'>
+                    <Question />
                   </Route>
                   <Route path='*'>
                     <Redirect to='/' />

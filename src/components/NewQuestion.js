@@ -48,8 +48,8 @@ class NewQuestion extends Component {
                     <div className='fw-bold'>Create New Question</div>
                 </div>
                 <div className='card-body'>
-                    <div class='card-text mb-4'>Complete the question:</div>
-                    <div class='card-text fw-bold mb-3'>Would you rather...</div>
+                    <div className='card-text mb-4'>Complete the question:</div>
+                    <div className='card-text fw-bold mb-3'>Would you rather...</div>
                     <form className='new-question' onSubmit={this.handleSubmit}>
                         <input type='text'
                             placeholder='Enter Option One Text Here'
