@@ -6,8 +6,9 @@ import { Redirect, Route, BrowserRouter as Router, Switch } from 'react-router-d
 import LoginPage from './components/LoginPage';
 import { handleInitialData } from './actions/shared';
 import Nav from './components/Nav';
-import { setAuthedUser } from './actions/authedUser';
 import Dashboard from './components/Dashboard';
+import NewQuestion from './components/NewQuestion';
+import Leaderboard from './components/Leaderboard';
 
 class App extends Component {
   componentDidMount() {
@@ -22,17 +23,23 @@ class App extends Component {
           {
             this.props.authedUser ?
               (
-                <Dashboard />
-              ) :
-              (
                 <Switch>
-                  <Route exact path='/login'>
-                    <LoginPage />
+                  <Route exact path='/'>
+                    <Dashboard />
+                  </Route>
+                  <Route exact path='/add'>
+                    <NewQuestion />
+                  </Route>
+                  <Route exact path='/leaderboard'>
+                    <Leaderboard />
                   </Route>
                   <Route path='*'>
-                    <Redirect to='/login' />
+                    <Redirect to='/' />
                   </Route>
                 </Switch>
+              ) :
+              (
+                <LoginPage />
               )
           }
         </div>

@@ -27,3 +27,7 @@ code {
 .img-avatar {
   width: 100%;
 }
+
+.score-card {
+  width: auto;
+}
