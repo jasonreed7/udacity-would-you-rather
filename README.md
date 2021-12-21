@@ -2,7 +2,7 @@
 
 This is a Would You Rather application built with React and Redux.
 
-## TL;DR
+## Running Application
 
 To get started:
 
