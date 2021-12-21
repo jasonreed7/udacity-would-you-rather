@@ -1,28 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { handleAnswerQuestion } from './../actions/questions';
+import QuestionForm from './QuestionForm';
 import QuestionResult from './QuestionResult';
+import QuestionNotFound from './QuestionNotFound';
 
 class Question extends Component {
-    state = {
-        selectedOption: 'optionOne'
-    }
-    handleChange = (e) => {
-        this.setState({
-            selectedOption: e.target.value
-        })
-    }
-    handleSubmit = (e) => {
-        e.preventDefault()
-
-        this.props.dispatch(handleAnswerQuestion(this.props.question.id, this.state.selectedOption))
-    }
     render() {
+        if (!this.props.question) {
+            return <QuestionNotFound />
+        }
         return (
             <div className='card'>
                 <div className='card-header'>
-                    <div className='fw-bold'>{this.props.author.name} asks:</div>
+                    <div className='fw-bold'>{this.props.answered ? `${this.props.author.name} asks:` : `Asked by ${this.props.author.name}`}</div>
                 </div>
                 <div className="row g-0">
                     <div className="col-4 p-4 d-flex align-items-center">
@@ -32,52 +23,24 @@ class Question extends Component {
                         {this.props.answered ? (
                             <QuestionResult question={this.props.question} authedUser={this.props.authedUser} />
                         ) : (
-                            <div className="card-body">
-                                <div className="card-text fw-bold mb-3">Would you rather</div>
-                                <form onSubmit={this.handleSubmit}>
-                                    <div>
-                                        <div className="form-check">
-                                            <input className="form-check-input"
-                                                type="radio"
-                                                name="selectedOption"
-                                                id="selectedOption1"
-                                                value='optionOne'
-                                                checked={this.state.selectedOption === 'optionOne'}
-                                                onChange={this.handleChange}
-                                            />
-                                            <label className="form-check-label" for="selectedOption1">
-                                                {this.props.question.optionOne.text}
-                                            </label>
-                                        </div>
-                                        <div className="form-check">
-                                            <input className="form-check-input"
-                                                type="radio"
-                                                name="selectedOption"
-                                                id="selectedOption2"
-                                                value='optionTwo'
-                                                checked={this.state.selectedOption === 'optionTwo'}
-                                                onChange={this.handleChange}
-                                            />
-                                            <label className="form-check-label" for="selectedOption2">
-                                                {this.props.question.optionTwo.text}
-                                            </label>
-                                        </div>
-                                        <div className="d-grid gap-2 mt-2">
-                                            <button className='btn btn-outline-primary' type='submit'>Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <QuestionForm question={this.props.question} />
                         )}
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }
 
 function mapStateToProps({ questions, users, authedUser }, props) {
     const questionId = props.match.params.questionId
+
+    if (!questions[questionId]) {
+        return {
+            question: null
+        }
+    }
+
     return {
         question: questions[questionId],
         author: users[questions[questionId].author],

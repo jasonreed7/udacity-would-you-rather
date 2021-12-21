@@ -55,7 +55,7 @@ function getAnsweredQuestions(questions, authedUser, findAnswered) {
         .filter(question => {
             const isAnswered = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser)
             return isAnswered === findAnswered
-        })
+        }).sort((a, b) => b.timestamp - a.timestamp)
 }
 
 export default connect(mapStateToProps)(Dashboard)

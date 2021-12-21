@@ -11,9 +11,6 @@ export function handleInitialData() {
             dispatch(receiveUsers(users))
             dispatch(receiveQuestions(questions))
             dispatch(hideLoading())
-
-            // TODO: remove when dev complete
-            dispatch(setAuthedUser('sarahedo'))
         })
     }
 }

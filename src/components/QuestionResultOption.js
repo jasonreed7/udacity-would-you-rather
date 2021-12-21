@@ -1,13 +1,15 @@
 import React from 'react'
-import authedUser from './../reducers/authedUser';
 
 export default function QuestionResultOption(props) {
+    const receivedVotes = props.question[props.option].votes.length
+    const totalVotes = props.question['optionOne'].votes.length + props.question['optionTwo'].votes.length
+    const percentage = Math.round((receivedVotes / totalVotes) * 100)
     return (
-        <div class={isSelected(props.question, props.option, props.authedUser) ? 'card result-option-card mb-3 selected' : 'card result-option-card mb-3'} >
-            <div class='card-body'>
-                <div class='card-text'>{props.question[props.option].text}</div>
-                <div class='card-text'>{props.question[props.option].votes.length} out
-                    of {props.question['optionOne'].votes.length + props.question['optionTwo'].votes.length} votes</div>
+        <div className={isSelected(props.question, props.option, props.authedUser) ? 'card result-option-card mb-3 selected' : 'card result-option-card mb-3'} >
+            <div className='card-body'>
+                <div className='card-text'>{props.question[props.option].text}</div>
+                <div className='card-text'>{receivedVotes} out
+                    of {totalVotes} votes ({percentage}%)</div>
             </div>
         </div>
     )
