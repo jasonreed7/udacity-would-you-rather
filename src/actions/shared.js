@@ -2,7 +2,6 @@ import { _getUsers, _getQuestions } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
 import { receiveUsers } from "./users";
 import { receiveQuestions } from "./questions";
-import { setAuthedUser } from "./authedUser";
 
 export function handleInitialData() {
     return (dispatch) => {
